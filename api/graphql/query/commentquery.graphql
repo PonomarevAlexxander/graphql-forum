@@ -1,0 +1,5 @@
+type CommentQuery
+
+extend type Query {
+  comment: CommentQuery!
+}

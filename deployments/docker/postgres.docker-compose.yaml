@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:${POSTGRES_TAG}
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "${DB_NAME}", "-U", "${DB_USER}" ]
+      timeout: ${DB_HEALTHCHECK_TIMEOUT}
+      interval: ${DB_HEALTHCHECK_INTERVAL}
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+    networks:
+      - graphql-forum
+
+networks:
+  graphql-forum:
+    driver: bridge
+
+volumes:
+  pgdata:

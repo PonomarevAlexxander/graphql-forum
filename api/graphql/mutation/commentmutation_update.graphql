@@ -1,0 +1,19 @@
+extend type CommentMutation {
+  update(input: CommentUpdateInput!): CommentUpdateResult! @goField(forceResolver: true)
+}
+
+input CommentUpdateInput {
+  userId: Uuid!
+  commentId: Uuid!
+  content: String
+}
+
+type CommentUpdateOk {
+  comment: Comment!
+}
+
+union CommentUpdateResult =
+  | NotFoundError
+  | ConflictError
+  | InternalError
+  | CommentUpdateOk

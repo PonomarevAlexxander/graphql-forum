@@ -1,0 +1,22 @@
+extend type CommentMutation {
+  create(input: CommentCreateInput!): CommentCreateResult! @goField(forceResolver: true)
+}
+
+input CommentCreateInput {
+  postId: Uuid!
+  # parentId - Id of parent Comment or null
+  parentId: Uuid
+  userId: Uuid!
+  content: String!
+}
+
+type CommentCreateOk {
+  comment: Comment!
+}
+
+union CommentCreateResult =
+  | NotFoundError
+  | ConflictError
+  | BadRequestError
+  | InternalError
+  | CommentCreateOk

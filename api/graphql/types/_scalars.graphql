@@ -1,0 +1,3 @@
+scalar Uuid
+scalar Rfc3339Date
+scalar UInt

@@ -1,0 +1,14 @@
+type Post {
+  id: Uuid!
+  title: String
+  author: UserResolvingResult @goField(forceResolver: true)
+  createdAt: Rfc3339Date
+  editedAt: Rfc3339Date
+  content: String
+  commentsAllowed: Boolean
+}
+
+union PostResolvingResult =
+  | Post
+  | NotFoundError
+  | InternalError

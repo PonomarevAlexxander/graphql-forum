@@ -1,0 +1,20 @@
+extend type PostMutation {
+  update(input: PostUpdateInput!): PostUpdateResult! @goField(forceResolver: true)
+}
+
+input PostUpdateInput {
+  userId: Uuid!
+  postId: Uuid!
+  title: String
+  content: String
+  commentsAllowed: Boolean
+}
+
+type PostUpdateOk {
+  post: Post!
+}
+
+union PostUpdateResult =
+  | NotFoundError
+  | InternalError
+  | PostUpdateOk

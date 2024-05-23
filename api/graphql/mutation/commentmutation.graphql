@@ -1,0 +1,5 @@
+type CommentMutation
+
+extend type Mutation {
+  comment: CommentMutation!
+}

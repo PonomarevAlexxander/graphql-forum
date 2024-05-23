@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  gql-forum:
+    container_name: gql-forum
+    image: gql-forum:latest
+    volumes:
+      - ../../config/app/config.yaml:/config/app/config.yaml
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - graphql-forum
+    depends_on:
+      postgres:
+        condition: service_healthy

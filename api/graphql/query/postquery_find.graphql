@@ -1,0 +1,31 @@
+extend type PostQuery {
+  # Fetches first N posts after post with cursor = after
+  findAll(first: UInt = 50, after: String = null): PostFindAllResult! @goField(forceResolver: true)
+  find(postId: Uuid!): PostFindResult! @goField(forceResolver: true)
+}
+
+type PostEdge {
+  post: PostResolvingResult!
+  cursor: String
+}
+
+type PostFindAllList {
+  totalCount: TotalCountResolvingResult @goField(forceResolver: true)
+  edges: [PostEdge!]
+  pageInfo: PageInfo
+}
+
+union PostFindAllResult =
+  | NotFoundError
+  | PostFindAllList
+  | InternalError
+
+type PostFindElement {
+  post: PostResolvingResult!
+  comments(first: UInt = 50, after: String = null): CommentsConnectionResolvingResult @goField(forceResolver: true)
+}
+
+union PostFindResult =
+  | PostFindElement
+  | NotFoundError
+  | InternalError

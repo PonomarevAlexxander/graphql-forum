@@ -1,0 +1,13 @@
+extend type CommentQuery {
+  find(commentId: Uuid!): CommentFindResult! @goField(forceResolver: true)
+}
+
+type CommentFindElement {
+  comment: CommentResolvingResult!
+  replies(first: UInt = 50, after: String = null): CommentsConnectionResolvingResult @goField(forceResolver: true)
+}
+
+union CommentFindResult =
+  | NotFoundError
+  | CommentFindElement
+  | InternalError

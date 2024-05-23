@@ -1,0 +1,11 @@
+type User {
+  id: Uuid!
+  email: String
+  firstName: String
+  lastName: String
+}
+
+union UserResolvingResult =
+  | User
+  | NotFoundError
+  | InternalError

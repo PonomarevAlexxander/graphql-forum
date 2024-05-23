@@ -1,0 +1,19 @@
+extend type PostMutation {
+  create(input: PostCreateInput!): PostCreateResult! @goField(forceResolver: true)
+}
+
+input PostCreateInput {
+  userId: Uuid!
+  title: String!
+  content: String!
+  commentsAllowed: Boolean!
+}
+
+type PostCreateOk {
+  post: Post!
+}
+
+union PostCreateResult =
+  | NotFoundError
+  | InternalError
+  | PostCreateOk

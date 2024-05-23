@@ -1,0 +1,32 @@
+type Comment {
+  id: Uuid!
+  # parentId - Id of parent Comment or null
+  parentId: Uuid
+  postId: Uuid
+  author: UserResolvingResult @goField(forceResolver: true)
+  createdAt: Rfc3339Date
+  editedAt: Rfc3339Date
+  content: String
+}
+
+type CommentEdge {
+  comment: CommentResolvingResult!
+  cursor: String
+  replies(first: UInt = 2, after: String = null): CommentsConnectionResolvingResult @goField(forceResolver: true)
+}
+
+type CommentsConnection {
+  totalCount: TotalCountResolvingResult @goField(forceResolver: true)
+  edges: [CommentEdge!]
+  pageInfo: PageInfo
+}
+
+union CommentsConnectionResolvingResult =
+  | CommentsConnection
+  | NotFoundError
+  | InternalError
+
+union CommentResolvingResult =
+  | Comment
+  | NotFoundError
+  | InternalError

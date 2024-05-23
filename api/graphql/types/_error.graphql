@@ -1,0 +1,19 @@
+interface ErrorInterface {
+  message: String!
+}
+
+type InternalError implements ErrorInterface {
+  message: String!
+}
+
+type NotFoundError implements ErrorInterface {
+  message: String!
+}
+
+type ConflictError implements ErrorInterface {
+  message: String!
+}
+
+type BadRequestError implements ErrorInterface {
+  message: String!
+}

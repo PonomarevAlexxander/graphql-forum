@@ -1,0 +1,24 @@
+schema:
+  - ./api/graphql/**/*.graphql
+
+exec:
+  filename: internal/gql/runtime/generated.go
+  package: runtime
+
+model:
+  filename: internal/gql/model/generated.go
+  package: model
+
+resolver:
+  layout: follow-schema
+  dir: internal/gql/resolver
+  package: resolver
+  filename_template: "{name}.go"
+
+models:
+  Rfc3339Date:
+    model: github.com/PonomarevAlexxander/graphql-forum/internal/gql/model.Rfc3339Date
+  UInt:
+    model: github.com/PonomarevAlexxander/graphql-forum/internal/gql/model.UInt
+  Uuid:
+    model: github.com/PonomarevAlexxander/graphql-forum/internal/gql/model.Uuid

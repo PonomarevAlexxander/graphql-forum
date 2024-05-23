@@ -1,0 +1,20 @@
+db:
+  # Can be 'psql' or 'in-memory'
+  type: "psql"
+  host: "postgres:5432"
+  name: "forum"
+  user: "pguser"
+  password: "pgpwd"
+server:
+  host: ":8080"
+  write-timeout: 15s
+  read-timeout: 15s
+gql:
+  max-complexity: 500
+  web-socket-live: 5s
+  data-loaders:
+    wait-time: 2ms
+    max-batch-size: 100
+logger:
+  # stdout log level
+  level: "debug"
